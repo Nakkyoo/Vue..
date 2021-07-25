@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="app">
+        {{ str }}
+        <app-header v-bind:propsdata="num"></app-header>
+        <app-footer v-on:pass="fnatic"></app-footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template : '<div>Header</div>',
+            props : ['propsdata']
+        }
+        var appFooter = {
+            template : '<h1>Footer<button v-on:click="passNum">click me</button></h1>',
+            methods : {
+                passNum : function(){
+                    this.$emit('pass',19);
+                }
+            }            
+        }
+        new Vue({
+            el : '#app',
+            components : {
+                'app-header' : appHeader,
+                'app-footer' : appFooter
+            },
+            data : {str:123,
+                    num : 10
+            },
+            methods : {
+                fnatic : function(value){
+                    this.num = value;
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
